@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>valid</title>
+    <style>
+      section {
+        height: 600px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <form name="login">
+        <h1>Filup Your Information</h1>
+        <div>
+          Name:
+          <input type="text" name="name" id="name" />
+        </div>
+        <br />
+        <div>
+          E-mail:
+          <input type="text" name="mail" id="mail" onblur="getmail()" />
+        </div>
+        <br />
+        <div>
+          Password:
+          <input
+            type="password"
+            name="password"
+            id="pas"
+            onchange="getPassword()"
+          />
+        </div>
+        <br />
+        <div>
+          Gender:
+          <input type="radio" name="x" value="Male" />Male
+          <input type="radio" name="x" value="Female" />Female
+        </div>
+        <br />
+        <div>
+          Education:
+          <input type="checkbox" value="HSC" name="education" />HSC
+          <input type="checkbox" value="DIPLOMA" name="education" />DIPLOMA
+        </div>
+        <br />
+        <div>
+          Subject:
+          <select name="subject" id="">
+            <option value="CSE">CSE</option>
+            <option value="EEE">EEE</option>
+            <option value="ME">ME</option>
+          </select>
+        </div>
+        <br />
+        <div>
+          <input type="reset" value="Reset" />
+          <input type="submit" value="Submit" onclick="bornohin()" />
+        </div>
+      </form>
+    </section>
+    <script>
+      function getmail() {
+        var mail = document.getElementById("mail");
+        var mailF = /^[^ ]+@[^ ]+\.[a-z]{2,6}$/;
+        if (!mailF.test(mail.value)) {
+          alert("plase type valid mail");
+          return false;
+        }
+        return true;
+      }
+      function getPassword() {
+        var password = document.getElementById("pas");
+        var getPassword = /^[^ ]{8,22}$/;
+        if (!getPassword.test(password.value)) {
+          alert("plase type valid password");
+          return false;
+        }
+        return true;
+      }
+
+      function bornohin() {
+        var name = document.login.name.value;
+        var email = document.login.mail.value;
+        var password = document.login.password.value;
+        var gender = document.login.x.value;
+        var education = "";
+        for (i = 0; i < document.login.education.length; i++) {
+          if (document.login.education[i].checked)
+            education += document.login.education[i].value + " ";
+        }
+        var subject = document.login.subject.value;
+
+        var getFile = open("", "", "height=300px, width=300px");
+
+        with (getFile.document) {
+          write('<div style="border:2px solid black;padding:20px">');
+          write("Name: " + name + "<br>");
+          write("E-mail: " + email + "<br>");
+          write("Password: " + password + "<br>");
+          write("Gender: " + gender + "<br>");
+          write("Education: " + education + "<br>");
+          write("Subject: " + subject + "<br>");
+          write(' <button onclick="self.close()">Close</button> ');
+          write(' <button onclick="self.print()">Print</button> ');
+        }
+      }
+    </script>
+  </body>
+</html>
